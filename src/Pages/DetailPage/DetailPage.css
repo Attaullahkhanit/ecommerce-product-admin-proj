@@ -1,0 +1,92 @@
+.detailpage-heading1{
+    width: 100%;
+    background-color:antiquewhite;
+    text-align: center;
+    padding: 10px 0 10px 0;
+    color: black;
+}
+.detailpage-card{
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    
+}
+:where(.css-dev-only-do-not-override-1i536d8).ant-card-bordered .ant-card-cover {
+    margin-top: -1px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    
+    /* margin-inline-end: -1px; */
+    padding-left: 0px;
+    left: 0px;
+    right: 0px;
+    
+}
+:where(.css-dev-only-do-not-override-1i536d8).ant-card .ant-card-body {
+    padding: 0px;
+    border-radius: 0 0 0px 0px;
+    background-color: #ffffff;
+    margin-top: 5px;
+    color: black;
+    width: -webkit-fill-available;
+}
+:where(.css-dev-only-do-not-override-1i536d8).ant-card-bordered .ant-card-cover {
+    width: 33%;
+    margin-top: -1px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    /* margin-inline-end: -1px; */
+    padding-left: 0px;
+    left: 0px;
+    right: 0px;
+}
+:where(.css-dev-only-do-not-override-1i536d8).ant-card .ant-card-body {
+    padding: 0px;
+    border-radius: 0 0 0px 0px;
+    background-color: #f8f8f8;
+    margin-top: 5px;
+    color: black;
+}
+.detailpage-card-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.detailpage-card-title-col{
+    display: flex;
+    flex-direction: column;
+}
+:where(.css-dev-only-do-not-override-1i536d8).ant-card-hoverable {
+    transition: box-shadow 0.2s,border-color 0.2s;
+    display: flex;
+    flex-direction: row;
+}
+.detailpage-card-author{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    margin-top: 10px;
+
+}
+.detailpage-card-author1{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+div{
+    margin-top: 0px;
+}
+
+/* image */
+:where(.css-dev-only-do-not-override-1i536d8).ant-card .ant-card-cover img {
+    border-radius: 8px 1px 0 8px;
+}
+/* card body */
+:where(.css-dev-only-do-not-override-1i536d8).ant-card .ant-card-body {
+    padding: 0px;
+    border-radius: 0 0 0px 0px;
+    background-color: #ffffff;
+    margin-top: 5px;
+    color: black;
+}
+

@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+button:focus {
+  outline: none;
+  background-color: initial !important;
+}

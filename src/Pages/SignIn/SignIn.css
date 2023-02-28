@@ -1,0 +1,49 @@
+
+*{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.heading-1{
+    text-align: center;
+    padding: 10px 0 10px 0;
+    color: black;
+}
+.form{
+/*     
+    margin-top: 50px; */ 
+}
+.ed-btn{
+    background-color: rgb(2, 2, 66);
+    padding: 20px 30px;
+}
+:where(.css-dev-only-do-not-override-1i536d8).ant-btn >span {
+    display: inline-block;
+    position: relative;
+    bottom: 11px;
+}
+.card{
+  
+    justify-content: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.form-item1{
+    
+}
+:where(.css-dev-only-do-not-override-1i536d8).ant-row {
+    display: flex;
+    flex-flow: row wrap;
+    min-width: 0;
+    display: flex;
+    align-items: baseline;
+}
+
+:where(.css-dev-only-do-not-override-1i536d8).ant-input-affix-wrapper {
+    width: 106% !important; 
+    top: -18px !important;
+    padding: 0px 0px !important ; 
+    border-width: 0px !important; 
+    border-color: 0 !important; 
+}
