@@ -1,18 +1,18 @@
 
 
-const  initialData = {dtload: true}
-
-export const receivedOrdersListReducers = (state= initialData, action) => {
-            console.log(action, 'receivedaction')
-            const {payload, type} = action
-        if(type == "RECEIVED_ORDERS_LIST"){
-            return{
-                 payload,
+const initialData = {dtload: true}
+export const recOrderListRedux = (state = initialData, action) => {
+        const {payload, type} = action
+        
+        if(type == 'RECEIVED_ORDER_LIST'){
+            console.log(payload, 'recRdcr')
+            return {
+                payload,
                 ...state,
-                dtload: false  
+                dtload: false,
             }
         }else{
-            return{
+            return {
                 ...state
             }
         }

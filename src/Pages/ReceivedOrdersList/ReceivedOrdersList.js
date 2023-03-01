@@ -11,18 +11,17 @@ import TableRow from '@mui/material/TableRow';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Btnuser from '../../Component/Btnuser';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { receivedOrdersListAction } from '../../Redux/Actions/ReceivedOrdersListAction';
+import { receivedOrderListAction } from '../../Redux/Actions/ReceivedOrdersListAction';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#001529',
     color: theme.palette.common.white,
+    wordWrap: 'break-word',
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -39,26 +38,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(fname, lname, pname, price, status, address, pnumber) {
-  return { fname, lname, pname, price, status, address, pnumber};
-}
-
-const rows = [
-  createData('Frozen yot', 'Frozen', 'Do It', 2344, "Pending", "city, twonship, irland", 98434343),
-  createData('Oedipus', 'gep', 'Oedipus', 4337, "Recieved", "vally road, texas", 48343232),
-  createData('edge', 'jason', 'Meringue', 262, 'Recived', 'street no.32, micky italy',3434324),
-  createData('Cupcake', 305, 3.7, 67),
-  createData('Gingerbread', 356, 16.0, 49),
-];
-
 
 function ReceivedOrdersList() {
-          const dispatchData = useDispatch();
-          useEffect(()=> {
-            dispatchData(receivedOrdersListAction);
+          const dispatchdata = useDispatch();
+          useEffect(() => {
+              dispatchdata(receivedOrderListAction())
           },[])
-          const selectdata = useSelector((state)=> state)
-          console.log(selectdata.receivedOrdersListReducers, 'receiveddata');
+          const selectdata = useSelector(state => state);
+           console.log(selectdata.recOrderListRedux, 'htb recOrderlistRedux Data')
 
           const navigate = useNavigate();
           function onClickToReceivedAddForm(){
@@ -89,20 +76,20 @@ function ReceivedOrdersList() {
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    {selectdata.receivedOrdersListReducers.dtload == true ?
-                    <div style={{textAlign: 'center', margin: 'auto', fontSize: '20px', width: '100%'}}>Loading...</div>:
-                    selectdata?.receivedOrdersListReducers?.map((row) => (
-                        <StyledTableRow key={row?.fname}>
+                    {selectdata?.recOrderListRedux?.tdload == true ?
+                      <div>Loading...</div>:
+                      selectdata?.recOrderListRedux?.payload?.map((row) => (
+                        <StyledTableRow key={row?.name}>
                         <StyledTableCell component="th" scope="row">
-                            {row?.fname}
+                            {row?.name}
                         </StyledTableCell>
-                        <StyledTableCell >{row?.lname}</StyledTableCell>
+                        <StyledTableCell >{row?.username}</StyledTableCell>
                         <StyledTableCell >{row?.email}</StyledTableCell>
                         <StyledTableCell >{row?.price}</StyledTableCell>
                         <StyledTableCell >{row?.status}</StyledTableCell>
-                        <StyledTableCell >{row?.address}</StyledTableCell>
+                        <StyledTableCell >{row?.addresscode}</StyledTableCell>
                         <StyledTableCell >{row?.pnumber}</StyledTableCell>
-                        <StyledTableCell > <Stack direction="row" spacing={1}>
+                        <StyledTableCell ><Stack direction="row" spacing={1}>
                                                 <IconButton aria-label="delete">
                                                    <DeleteIcon />
                                                 </IconButton>

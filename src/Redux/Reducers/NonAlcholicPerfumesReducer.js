@@ -4,9 +4,12 @@
 const initialData = { dtload: true }
 
 export const nonAlcholicPerfumeReducer = (state = initialData, action) => {
-        if(action.type == "NONALCHOLICPERFUME") {
+        const {payload, type} = action;
+        if(type == "NON_ALCHOLIC_ACTION") {
             return {
-                ...action.payload
+                payload,
+                ...state,
+                dtload: false,
             } 
         }else {
             return {

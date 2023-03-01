@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Dashboard from '../Dashboard/Dashboard';
 import './NonAlcholicPerfumes.css';
 import { styled } from '@mui/material/styles';
@@ -16,6 +16,8 @@ import userimage from '../../Images/cutout.jpg';
 import Btnuser from '../../Component/Btnuser';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { nonAlcholicPerfumesAction } from '../../Redux/Actions/NonAlcholicPerfumesAction';
 
 
 
@@ -61,6 +63,13 @@ function NonAlcholicPerfumes() {
           function onClickToNonAlcholicDetail(){
               navigate('/nonalcholicperfumesdetail')
           }
+          const dispatchdata = useDispatch();
+          useEffect(()=> {
+            dispatchdata(nonAlcholicPerfumesAction());
+          },[])
+          console.log(dispatchdata, 'nonAlcholicPerfumedata');
+          const selectdata = useSelector(state => state);
+          console.log(selectdata.nonAlcholicPerfumeReducer, 'nonalcholicDtReducers');
   return (
     <>
       <Dashboard>
@@ -80,14 +89,16 @@ function NonAlcholicPerfumes() {
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
+                    {selectdata.nonAlcholicPerfumeReducer.dtload == true ?
+                      <div>Loading...</div>:
+                     selectdata?.nonAlcholicPerfumeReducer?.payload?.map((row) => (
+                        <StyledTableRow key={row?.name}>
                         <StyledTableCell component="th" scope="row">
-                            {row.name}
+                            {row?.name}
                         </StyledTableCell>
-                        <StyledTableCell ><img className=' ' style={{width: '50px', height: '50px'}} src={row.calories.tableuserimage} alt="tableuserimage"/></StyledTableCell>
-                        <StyledTableCell >{row.fat}</StyledTableCell>
-                        <StyledTableCell >{row.carbs}</StyledTableCell>
+                        <StyledTableCell ><img className=' ' style={{width: '50px', height: '50px'}} src={row?.imgsrc} alt="tableuserimage"/></StyledTableCell>
+                        <StyledTableCell >{row?.fat}</StyledTableCell>
+                        <StyledTableCell >{row?.carbs}</StyledTableCell>
                         <StyledTableCell ><Stack direction="row" spacing={1}>
                                                 <IconButton aria-label="delete">
                                                    <DeleteIcon />

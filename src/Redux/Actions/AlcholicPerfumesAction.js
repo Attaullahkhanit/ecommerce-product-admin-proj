@@ -3,8 +3,15 @@
 
 
 export const alcholicPerfumesAction = (obj) => {
-    return {
-        type: "ALCHOLICPERFUMES",
-        payload: obj
-    };
+    return function(dispatch){
+            fetch('https://jsonplaceholder.typicode.com/users',)
+            .then((result)=> result.json())
+            .then((res) => {
+            return dispatch({
+                    type: "ALCHOLIC_PERFUMES_ACT",
+                    payload: res
+                })
+            })
+    }
+    
 }
