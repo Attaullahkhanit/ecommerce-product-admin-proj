@@ -1,43 +1,70 @@
-import { Box, Card, CardContent, Link, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, Link, Typography } from '@mui/material';
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import './RegUsersList.css';
 import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 import CallIcon from '@mui/icons-material/Call';
+import { getFileSrcFromPublicFolderDetailpg } from '../../utils';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { CatchingPokemonSharp } from '@mui/icons-material';
 
 function RegUsersListDetail() {
           const navigate = useNavigate();
+          const uselocatdata =  useLocation()
+
+          // const [uselocat, setuseloct] = useState()
+          // useEffect(() => {
+          //   setuseloct(uselocatdata);
+
+          // })
+          // console.log(uselocat, 'myuselocatdatannnnn')
+ 
+          console.log(uselocatdata.state, 'myuselocatdatannnnn')
+
           function onClickBackToRegPage(){
               navigate('/')
           }
+          
+ 
   return (
     <>
         <Dashboard>
-          <Card sx={{ display: 'flex', flexDirection: 'row', maxWidth: '95%', marginTop: '10px', marginLeft: 'auto', marginRight:'auto' }}>
-          
-          <CardContent sx={{width: '40ch'}}>
-            <img src='https://images.pexels.com/photos/206648/pexels-photo-206648.jpeg?auto=compress&cs=tinysrgb&w=600' sizes='' alt=''/>
+          <Card sx={{maxWidth: '95%', mt: '10px', ml: 'auto', mr:'auto' }}>
+            <Box sx={{mt: '15px', ml: '10px'}}>
+                <Button onClick={onClickBackToRegPage} sx={{px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Back</Button>
+            </Box>
+          <Box sx={{display: 'flex', flexDirection: 'row'}}>
+          <CardContent sx={{width: '40%'}}>
+            <img src={getFileSrcFromPublicFolderDetailpg("DetailMainImg.png")} sizes='' alt=''/>
           </CardContent>
           <CardContent>
-            <Typography gutterBottom variant="h3" component="div">
-              Frozen
+            <Box sx={{display: 'flex', flexDirection: 'row', width: "100%"}}>
+              <Box sx={{mx: 2}}><img src={getFileSrcFromPublicFolderDetailpg("Rectangle 102.png")} sizes='' alt=''/></Box>
+              <Box sx={{mx: 2}}><img src={getFileSrcFromPublicFolderDetailpg("Rectangle 103.png")} sizes='' alt=''/></Box>
+              <Box sx={{mx: 2}}><img src={getFileSrcFromPublicFolderDetailpg("Rectangle 104.png")} sizes='' alt=''/></Box>
+            </Box>
+            <h4>{uselocatdata?.name}</h4>
+            <Typography sx={{fontWeight: 'bold'}} variant="h3" component="div">
+              {uselocatdata?.state?.name}
             </Typography>
-            <Typography gutterBottom variant="h6" component="div">
-              <ForwardToInboxIcon/><Link sx={{textDecoration: 'none', px: 2}}>Frozen@gmail.com</Link>
+            <Typography gutterBottom variant="body3"  color="text.secondary">
+              SKU: Chanel123
             </Typography>
-            <Typography gutterBottom variant="h6" component="div">
-              <CallIcon sx={{mr:1}}/> 051-46463-980
+            <Typography sx={{pt: 2}} variant="body1" component="div">
+              Nishane hacivant perfume 20ML
+            </Typography>
+            <Typography gutterBottom variant="body2" color="text.secondary">
+              Price: 200$
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Lizards are a widespread group of squamate reptiles, with over 6,000
-              species, ranging across all continents except Antarctica
+              species, ranging across all continents except Antarctica.species, ranging across all continents except Antarctica
             </Typography>
           </CardContent>
-          
-            <Box sx={{textAlign: 'right', marginLeft: 'auto', marginTop: '15px', mr: '10px'}}>
-                <Link onClick={onClickBackToRegPage} sx={{px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Back</Link>
-            </Box>
+          </Box>
+            
           </Card>
         </Dashboard>
     </>

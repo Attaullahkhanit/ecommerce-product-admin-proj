@@ -1,6 +1,6 @@
 
 
-
+// const url = process.env.BASE_URL
 
 export const alcholicPerfumesAction = (obj) => {
     return function(dispatch){
@@ -13,5 +13,4 @@ export const alcholicPerfumesAction = (obj) => {
                 })
             })
     }
-    
 }

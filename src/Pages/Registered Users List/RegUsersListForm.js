@@ -8,8 +8,29 @@ import { Card, CardContent, Link } from '@mui/material';
 import { textAlign } from '@mui/system';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import { useState } from 'react';
 
 function RegUsersListForm() {
+    const[pname, setPName] = useState();
+    const[sku, setSku] = useState();
+    const[specification, setSpecification] = useState();
+    const[price, setPrice] = useState();
+    const[description, setDescription] = useState();
+
+    const formObjData = {
+                            perfumeName: pname,
+                            sku: sku,
+                            specification: specification,
+                            price: price,
+                            description: description,
+                        }
+    const regUsersData = () => {
+        localStorage.setItem('regformdata',JSON.stringify(formObjData))
+        navigate('/')
+        alert("Submitted Successfully")
+        }
+    console.log(regUsersData, 'regUsersData')
+    console.log(formObjData, 'formObj')
     const navigate = useNavigate();
     function onClickBackToAddForm(){
         navigate('/')
@@ -33,26 +54,41 @@ function RegUsersListForm() {
                     <div>
                     <TextField
                         id="outlined-password-input"
-                        label="First Name"
+                        label="Perfume Name"
                         type="name"
+                        value={pname}
+                        onChange={(e) => setPName(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
-                        label="Last Name"
+                        label="SKU No"
                         type="name"
+                        value={sku}
+                        onChange={(e) => setSku(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
-                        label="Email Id"
+                        label="Specification"
                         type="name"
+                        value={specification}
+                        onChange={(e) => setSpecification(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
-                        label="Phone No"
+                        label="Price"
                         type="name"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                    />
+                    <TextField
+                        id="outlined-password-input"
+                        label="Description"
+                        type="name"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                     />
                     <br/>
-                      <Button sx={{width: "30ch", my:3}} variant="contained" endIcon={<SendIcon />}>
+                      <Button onClick={regUsersData} sx={{width: "30ch", my:3}} variant="contained" endIcon={<SendIcon />}>
                         Submit
                       </Button>
                     </div>

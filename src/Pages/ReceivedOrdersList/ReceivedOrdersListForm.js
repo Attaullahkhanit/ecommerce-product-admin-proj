@@ -7,9 +7,30 @@ import Dashboard from '../Dashboard/Dashboard';
 import { Card, CardContent, Link, } from '@mui/material';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import { useState } from 'react';
 
 
 function ReceivedOrdersListForm() {
+
+        const [firstName, setFirstName] = useState();
+        const [lastName, setLastName] = useState();
+        const [perfumeName, setPerfumeName] = useState();
+        const [price, setPrice] = useState();
+        const [status, setStatus] = useState();
+        const [address, setAddress] = useState();
+        const [phone, setPhone] = useState();
+        
+        const receivedOrderFormObjData = {
+                                            fname: firstName,
+                                            lname: lastName,
+                                            pname: perfumeName,
+                                            price: price,
+                                            status: status,
+                                            address: address,
+                                            phone: phone
+                                        }
+        console.log(receivedOrderFormObjData, 'RecivedFormObjData')
+
         const navigate = useNavigate();
         function onClickBackToAddForm(){
             navigate('/nonalcholicperfumes')
@@ -35,36 +56,50 @@ function ReceivedOrdersListForm() {
                         id="outlined-password-input"
                         label="First Name"
                         type="name"
+                        value={firstName}
+                        onChange = {(e) => setFirstName(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
                         label="Last Name"
                         type="name"
+                        value={lastName}
+                        onChange = {(e) => setLastName(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
                         label="Perfume Name"
                         type="name"
+                        value={perfumeName}
+                        onChange = {(e) => setPerfumeName(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
                         label="Price"
                         type="name"
+                        value={price}
+                        onChange = {(e) => setPrice(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
                         label="Status"
                         type="name"
+                        value={status}
+                        onChange = {(e) => setStatus(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
                         label="Deivery Address"
                         type="name"
+                        value={address}
+                        onChange = {(e) => setAddress(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
                         label="Phone No"
                         type="name"
+                        value={phone}
+                        onChange = {(e) => setPhone(e.target.value)}
                     />
                         <br/>
                       <Button sx={{width: "30ch", my:3}} variant="contained" endIcon={<SendIcon />}>

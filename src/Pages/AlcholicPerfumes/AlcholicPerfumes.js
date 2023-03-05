@@ -11,9 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import userimage from '../../Images/cutout.jpg';
-import Btnuser from '../../Component/Btnuser';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,21 +39,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
   }));
   
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
-  
-  const rows = [
-    createData('Frozen yot', tableuserimage, 234, "expensive"),
-    createData('florence', tableuserimage, 234, 'very good enough'),
-    createData('Gorge', tableuserimage, 2956, 'you can easily buy'),
-    createData('Cupcake', 305, 3.7, 67),
-    createData('Gingerbread', 356, 16.0, 49),
-  ];
   
 
 function AlcholicPerfumes() {
-
+        
         const navigate = useNavigate();
         function onClickAddForm(){
             navigate('/alcholicperfumeform')

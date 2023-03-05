@@ -30,27 +30,27 @@ function App() {
     <> 
       <BrowserRouter>
           <Routes>
-              <Route path="/" element={<RegUsersList />} />
-              <Route path="/perfumesignin" element={<PerfumeSignIn />} />
-              <Route path="/alcholicperfumes" element={<AlcholicPerfumes />} />
-              <Route path="/nonalcholicperfumes" element={<NonAlcholicPerfumes />} />
-              <Route path="/receivedorderslist" element={<ReceivedOrdersList />} />
+              <Route exact path="/" element={<RegUsersList />} />
+              <Route exact path="/perfumesignin" element={<PerfumeSignIn />} />
+              <Route exact path="/alcholicperfumes" element={<AlcholicPerfumes />} />
+              <Route exact path="/nonalcholicperfumes" element={<NonAlcholicPerfumes />} />
+              <Route exact path="/receivedorderslist" element={<ReceivedOrdersList />} />
                 {/* Detail_Routing */}
-              <Route path="/reguserslistform" element={<RegUsersListForm />} />
-              <Route path="/receivedordersform" element={<ReceivedOrdersListForm/>} />
-              <Route path="/alcholicperfumeform" element={<AlcholicPerfumeForm/>} />
-              <Route path="/nonalcholicperfumesform" element={<NonAlcholicPerfumesForm/>} />
+              <Route exact path="/reguserslistform" element={<RegUsersListForm />} />
+              <Route exact path="/receivedordersform" element={<ReceivedOrdersListForm/>} />
+              <Route exact path="/alcholicperfumeform" element={<AlcholicPerfumeForm/>} />
+              <Route exact path="/nonalcholicperfumesform" element={<NonAlcholicPerfumesForm/>} />
                 {/* Form_Routing */}
-              <Route path="/reguserslistdetail" element={<RegUsersListDetail />} />
-              <Route path="/receivedorderlistdetail" element={<ReceivedOrderListDetail />} />
-              <Route path="/alcholicperfumesdetail" element={<AlcholicPerfumesDetail />} />
-              <Route path="/nonalcholicperfumesdetail" element={<NonAlcholicPerfumesDetail />} />
-              {/* <Route path="/" element={<Home />} /> */}
-              {/* <Route path="/signin" element={<SignIn />} />  
-              <Route path="/signup" element={<SignUp />} />
+              <Route exact path="/reguserslistdetail" element={<RegUsersListDetail />} />
+              <Route exact path="/receivedorderlistdetail" element={<ReceivedOrderListDetail />} />
+              <Route exact path="/alcholicperfumesdetail" element={<AlcholicPerfumesDetail />} />
+              <Route exact path="/nonalcholicperfumesdetail" element={<NonAlcholicPerfumesDetail />} />
+              {/* <Route exact path="/" element={<Home />} /> */}
+              {/* <Route exact path="/signin" element={<SignIn />} />  
+              <Route exact path="/signup" element={<SignUp />} />
               <Route path='/detailpage' element={<DetailPage/>} />
-              <Route path="/homePage" element={<HomePage />} />  
-              <Route path="/dashboard" element={<Dashboard />} /> */}
+              <Route exact path="/homePage" element={<HomePage />} />  
+              <Route exact path="/dashboard" element={<Dashboard />} /> */}
           </Routes>
         </BrowserRouter> 
     </>

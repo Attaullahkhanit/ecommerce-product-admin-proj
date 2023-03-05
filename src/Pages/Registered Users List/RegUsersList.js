@@ -11,13 +11,11 @@ import TableRow from '@mui/material/TableRow';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Btnuser from '../../Component/Btnuser';
 import {useSelector, useDispatch} from 'react-redux';
 import { regUsersListAction } from '../../Redux/Actions/RegUsersListAction';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 // import Paper from '@mui/material/Paper';
 
@@ -64,6 +62,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   
   
 function RegUsersList() {
+        
 
         const dispatchdata = useDispatch();
         useEffect(()=> {
@@ -76,8 +75,13 @@ function RegUsersList() {
         function onClickAddForm(){
             navigate('/reguserslistform')
         }
-        function onClickViewDetail(){
-          navigate('/reguserslistdetail')
+        function onClickViewDetail(objrow){
+          //  objrow 
+          console.log("sdfsdfsdf")          
+          navigate(
+            '/reguserslistdetail',
+            {state: objrow}, 
+          )
         }
 
         const [firstName, setFirstName] = useState();
@@ -99,14 +103,16 @@ function RegUsersList() {
                 <div><h6>Register Users List</h6></div>
                 <div><Link onClick={onClickAddForm} sx={{px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Add User</Link></div>
             </div>
+            {/* , */}
             <TableContainer className='tablecontainer'>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
                     <TableRow>
-                        <StyledTableCell value={firstName} onChange={(e) => setFirstName(e.target.value)}>First Name</StyledTableCell>
-                        <StyledTableCell value={lastName} onChange={(e) => setLastName(e.target.value)}>Last Name</StyledTableCell>
-                        <StyledTableCell value={email} onChange={(e) => setEmail(e.target.value)}>Email Id</StyledTableCell>
-                        <StyledTableCell value={phone} onChange={(e) => setPhone(e.target.value)}>Phone No</StyledTableCell>
+                        <StyledTableCell value={firstName} onChange={(e) => setFirstName(e.target.value)}>Perfume Name</StyledTableCell>
+                        <StyledTableCell value={lastName} onChange={(e) => setLastName(e.target.value)}>SKU No</StyledTableCell>
+                        <StyledTableCell value={email} onChange={(e) => setEmail(e.target.value)}>Specification</StyledTableCell>
+                        <StyledTableCell value={phone} onChange={(e) => setPhone(e.target.value)}>Price</StyledTableCell>
+                        <StyledTableCell value={phone} onChange={(e) => setPhone(e.target.value)}>Description</StyledTableCell>
                         <StyledTableCell >Action</StyledTableCell>
                     </TableRow>
                     </TableHead>
@@ -114,19 +120,21 @@ function RegUsersList() {
                     {selectData.regUsersListReducer.dtload == true ?
                     <div>loading...</div>: 
                     selectData?.regUsersListReducer?.payload?.map((row) => (
-                        <StyledTableRow key={row?.fname}>
+                      
+                        <StyledTableRow key={row?.name}>
                         <StyledTableCell component="th" scope="row">
-                            {row?.fname}
+                            {row?.name}
                         </StyledTableCell>
-                        <StyledTableCell >{row?.lname}</StyledTableCell>
+                        <StyledTableCell >{row?.username}</StyledTableCell>
                         <StyledTableCell >{row?.email}</StyledTableCell>
-                        <StyledTableCell >{row?.phoneno}</StyledTableCell>
+                        <StyledTableCell >{row?.address.street}</StyledTableCell>
+                        <StyledTableCell >{row?.company.catchPhrase}</StyledTableCell>
                         <StyledTableCell > <Stack direction="row" spacing={1}>
                                                 <IconButton aria-label="delete">
                                                    <DeleteIcon />
                                                 </IconButton>
                                                 <IconButton color="primary" aria-label="add to shopping cart">
-                                                  <Link onClick={onClickViewDetail} sx={{fontSize: '12px', textDecoration: 'none'}} href="#">View</Link>
+                                                  <Button onClick={()=>onClickViewDetail(row)} sx={{fontSize: '12px', textDecoration: 'none'}} to="#">View</Button>
                                                 </IconButton>
                                             </Stack>
                         </StyledTableCell>

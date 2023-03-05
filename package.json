@@ -1,5 +1,5 @@
 {
-  "name": "librarymanage",
+  "name": "ecommerce-product-admin-proj",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.0.5",
     "antd-search-box": "^0.1.0",
+    "dotenv": "^16.0.3",
     "materialize-css": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -7,9 +7,23 @@ import Dashboard from '../Dashboard/Dashboard';
 import { Card, CardContent, Link, } from '@mui/material';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import { useState } from 'react';
 
 
 function NonAlcholicPerfumesForm() {
+
+            const [firstName, setFirstName] = useState();
+            const [imgsrc, setImgSrc] = useState();
+            const [price, setPrice] = useState();
+            const [description, setDescription] = useState();
+
+            const nonalcholicformObjData = {
+                                            fname: firstName,
+                                            imgsrc: imgsrc,
+                                            price: price,
+                                            description: description
+                                        }
+            console.log(nonalcholicformObjData, 'nonalcholicformdata')
           const navigate = useNavigate();
           function onClickBackToAddForm(){
               navigate('/nonalcholicperfumes')
@@ -36,20 +50,28 @@ function NonAlcholicPerfumesForm() {
                         label="First Name"
                         type="name"
                         autoComplete="current-password"
+                        value = {firstName}
+                        onChange = {(e) => setFirstName(e.target.value)}
                     />
                     <TextField
                         name='upload-photo'
                         type='file'
+                        value={imgsrc}
+                        onChange = {(e) => setImgSrc(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
                         label="Price"
                         type="textarea"
+                        value={price}
+                        onChange = {(e) => setPrice(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
                         label="Description"
                         type="textarea"
+                        value={description}
+                        onChange = {(e) => setDescription(e.target.value)}
                     />
                         <br/>
                       <Button sx={{width: "30ch", my:3}} variant="contained" endIcon={<SendIcon />}>

@@ -1,5 +1,4 @@
 
-
 export const nonAlcholicPerfumesAction = (objdata) => {
     return function(dispatch){
         fetch('https://jsonplaceholder.typicode.com/users',)
@@ -11,5 +10,4 @@ export const nonAlcholicPerfumesAction = (objdata) => {
             });
         });
     }
-    
 }
