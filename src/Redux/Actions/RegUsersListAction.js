@@ -1,16 +1,16 @@
 
 
 export const regUsersListAction = (dataitem) => {
-       console.log("checkdata")
-    return function (dispatch){
-             fetch('https://jsonplaceholder.typicode.com/users',)
+    console.log("checkdata")
+    return function (dispatch) {
+        fetch('https://jsonplaceholder.typicode.com/users',)
             .then((response) => response.json())
-            .then((res)=> {
+            .then((res) => {
                 console.log("MyReg")
                 dispatch({
-                            type: "REG_USERLIST",
-                            payload: res
-                        })
-                        })       
+                    type: "REG_USERLIST",
+                    payload: res
+                })
+            })
     }
 }

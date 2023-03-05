@@ -1,14 +1,5 @@
 import './App.css';
-import {DatePicker, Button} from 'antd';
-
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import SignIn from './Pages/SignIn/SignIn';
-import SignUp from './Pages/SignUp/SignUp';
-import Home from './Pages/Home/Home';
-import DetailPage from './Pages/DetailPage/DetailPage';
-import { useEffect } from 'react';
-import HomePage from './Pages/HomePage/HomePage';
-import Dashboard from './Pages/Dashboard/Dashboard';
 import 'materialize-css/dist/css/materialize.min.css';
 import AlcholicPerfumes from './Pages/AlcholicPerfumes/AlcholicPerfumes';
 import RegUsersList from './Pages/Registered Users List/RegUsersList';
@@ -25,34 +16,28 @@ import AlcholicPerfumesDetail from './Pages/AlcholicPerfumes/AlcholicPerfumesDet
 import NonAlcholicPerfumesDetail from './Pages/NonAlcholicPerfumes/NonAlcholicPerfumesDetail';
 
 function App() {
-  
+
   return (
-    <> 
+    <>
       <BrowserRouter>
-          <Routes>
-              <Route exact path="/" element={<RegUsersList />} />
-              <Route exact path="/perfumesignin" element={<PerfumeSignIn />} />
-              <Route exact path="/alcholicperfumes" element={<AlcholicPerfumes />} />
-              <Route exact path="/nonalcholicperfumes" element={<NonAlcholicPerfumes />} />
-              <Route exact path="/receivedorderslist" element={<ReceivedOrdersList />} />
-                {/* Detail_Routing */}
-              <Route exact path="/reguserslistform" element={<RegUsersListForm />} />
-              <Route exact path="/receivedordersform" element={<ReceivedOrdersListForm/>} />
-              <Route exact path="/alcholicperfumeform" element={<AlcholicPerfumeForm/>} />
-              <Route exact path="/nonalcholicperfumesform" element={<NonAlcholicPerfumesForm/>} />
-                {/* Form_Routing */}
-              <Route exact path="/reguserslistdetail" element={<RegUsersListDetail />} />
-              <Route exact path="/receivedorderlistdetail" element={<ReceivedOrderListDetail />} />
-              <Route exact path="/alcholicperfumesdetail" element={<AlcholicPerfumesDetail />} />
-              <Route exact path="/nonalcholicperfumesdetail" element={<NonAlcholicPerfumesDetail />} />
-              {/* <Route exact path="/" element={<Home />} /> */}
-              {/* <Route exact path="/signin" element={<SignIn />} />  
-              <Route exact path="/signup" element={<SignUp />} />
-              <Route path='/detailpage' element={<DetailPage/>} />
-              <Route exact path="/homePage" element={<HomePage />} />  
-              <Route exact path="/dashboard" element={<Dashboard />} /> */}
-          </Routes>
-        </BrowserRouter> 
+        <Routes>
+          <Route exact path="/" element={<RegUsersList />} />
+          <Route exact path="/perfumesignin" element={<PerfumeSignIn />} />
+          <Route exact path="/alcholicperfumes" element={<AlcholicPerfumes />} />
+          <Route exact path="/nonalcholicperfumes" element={<NonAlcholicPerfumes />} />
+          <Route exact path="/receivedorderslist" element={<ReceivedOrdersList />} />
+          {/* Detail_Routing */}
+          <Route exact path="/reguserslistform" element={<RegUsersListForm />} />
+          <Route exact path="/receivedordersform" element={<ReceivedOrdersListForm />} />
+          <Route exact path="/alcholicperfumeform" element={<AlcholicPerfumeForm />} />
+          <Route exact path="/nonalcholicperfumesform" element={<NonAlcholicPerfumesForm />} />
+          {/* Form_Routing */}
+          <Route exact path="/reguserslistdetail" element={<RegUsersListDetail />} />
+          <Route exact path="/receivedorderlistdetail" element={<ReceivedOrderListDetail />} />
+          <Route exact path="/alcholicperfumesdetail" element={<AlcholicPerfumesDetail />} />
+          <Route exact path="/nonalcholicperfumesdetail" element={<NonAlcholicPerfumesDetail />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

@@ -1,9 +1,10 @@
-*{
+* {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
-.card{
+
+.card {
     width: 100%;
     height: auto;
     justify-content: center;
@@ -13,21 +14,25 @@
     padding-left: 0px;
     padding-right: 0px;
 }
-.home-avatar{
+
+.home-avatar {
     width: auto;
 }
-.home-searchbar{
+
+.home-searchbar {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    
+
 }
-.home-search{
+
+.home-search {
     text-align: center;
     width: 60%;
-    
+
 }
-.homoe-select{
+
+.homoe-select {
     margin: 0px 0px 0px 10px;
 }
 
@@ -38,6 +43,7 @@
     margin-top: 5px;
     color: black;
 }
+
 .search-result {
     background-color: #ffffff;
     list-style: none;
@@ -50,6 +56,7 @@
     display: block;
     cursor: pointer;
 }
+
 :where(.css-dev-only-do-not-override-1i536d8).ant-card .ant-card-body {
     padding: 0px 24px 0px 24px;
     border-radius: 0px;
@@ -57,15 +64,18 @@
     margin-top: 7px;
     color: black;
 }
+
 :where(.css-dev-only-do-not-override-1i536d8).ant-card-bordered {
     border-radius: 0px;
 }
+
 :where(.css-dev-only-do-not-override-1i536d8).ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
     border-radius: 0px;
     border-left: 5px solid #1677ff;
     background: none;
     margin-inline: 0px;
 }
+
 :where(.css-dev-only-do-not-override-1i536d8).ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background-color: none !important;
     border-radius: 0px;

@@ -1,9 +1,10 @@
-*{
+* {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
-.regUL-title{
+
+.regUL-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,10 +13,11 @@
     margin-right: 20px;
 }
 
-.regUL-title h6{
+.regUL-title h6 {
     font-weight: 600;
     padding-left: 30px;
 }
-.tablecontainer{
+
+.tablecontainer {
     padding: 0 20px 0 20px;
 }

@@ -1,14 +1,15 @@
 
 
-const initialData = { dtload: true}
+const initialData = { dtload: true }
 
-export const perfumeSignInReducer = (state= initialData, action) => {
-        if(action.type == "USERSIGNUP"){
-            return {
-                ...action.payload
-            }
-        }else{
-            return {...state
-            }
+export const perfumeSignInReducer = (state = initialData, action) => {
+    if (action.type == "USERSIGNUP") {
+        return {
+            ...action.payload
         }
+    } else {
+        return {
+            ...state
+        }
+    }
 }
