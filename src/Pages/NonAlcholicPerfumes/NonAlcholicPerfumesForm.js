@@ -32,10 +32,10 @@ function NonAlcholicPerfumesForm() {
     <>
         <Dashboard>
         <Card sx={{ maxWidth: '70%', marginTop: '10px', marginLeft: 'auto', marginRight:'auto' }}>
-            <CardContent sx={{textAlign: 'center'}}>
-                <Box sx={{justifyContent: 'end', textAlign: 'right'}}>
-                    <Link onClick={onClickBackToAddForm} sx={{px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Back</Link>
+                <Box sx={{p: 2}}>
+                    <Button onClick={onClickBackToAddForm} sx={{px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Back</Button>
                 </Box>
+            <CardContent sx={{textAlign: 'center'}}>
                 <Box
                     component="form"
                     sx={{

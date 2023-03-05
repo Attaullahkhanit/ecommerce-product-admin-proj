@@ -17,6 +17,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { alcholicPerfumesAction } from '../../Redux/Actions/AlcholicPerfumesAction';
+import { Box, Button } from '@mui/material';
+import { getFileSrcFromPublicimg } from '../../utils';
+
+
 
 const tableuserimage = userimage
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -61,7 +65,9 @@ function AlcholicPerfumes() {
         <Dashboard>
             <div className='regUL-title'>
                 <div><h6>Alcholic Perfumes</h6></div>
-                <div><Link onClick={onClickAddForm} sx={{px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Add User</Link></div>
+                <Box sx={{p: 2}}>
+                    <Button onClick={onClickAddForm} sx={{px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Add User</Button>
+                </Box>
             </div>
             <TableContainer className='tablecontainer' >
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -83,15 +89,15 @@ function AlcholicPerfumes() {
                         <StyledTableCell component="th" scope="row">
                             {row?.name}
                         </StyledTableCell>
-                        <StyledTableCell ><img className=' ' style={{width: '50px', height: '50px'}} src={row?.imgsrc} alt="tableuserimage"/></StyledTableCell>
-                        <StyledTableCell >{row?.price}</StyledTableCell>
-                        <StyledTableCell >{row?.description}</StyledTableCell>
+                        <StyledTableCell ><img className=' ' style={{width: '50px', height: '50px'}} src={getFileSrcFromPublicimg("Ellipse 26.png")} alt="tableuserimage"/></StyledTableCell>
+                        <StyledTableCell >{row?.price}343$</StyledTableCell>
+                        <StyledTableCell >{row?.description}it was very good perfume</StyledTableCell>
                         <StyledTableCell > <Stack direction="row" spacing={1}>
                                                 <IconButton aria-label="delete">
                                                    <DeleteIcon />
                                                 </IconButton>
                                                 <IconButton color="primary" aria-label="add to shopping cart">
-                                                  <Link onClick={onClickToAlcholicDetail} sx={{fontSize: '12px', textDecoration: 'none'}} href="#">View</Link>
+                                                  <Button onClick={()=>onClickToAlcholicDetail(row)} sx={{fontSize: '11px', textDecoration: 'none'}} to="#">View</Button>
                                                 </IconButton>
                                             </Stack>
                         </StyledTableCell>

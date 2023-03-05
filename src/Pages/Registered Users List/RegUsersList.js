@@ -101,7 +101,9 @@ function RegUsersList() {
         <Dashboard>
             <div className='regUL-title'>
                 <div><h6>Register Users List</h6></div>
-                <div><Link onClick={onClickAddForm} sx={{px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Add User</Link></div>
+                <Box sx={{p: 2}}>
+                    <Button onClick={onClickAddForm} sx={{px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Add User</Button>
+                </Box>
             </div>
             {/* , */}
             <TableContainer className='tablecontainer'>
@@ -134,7 +136,7 @@ function RegUsersList() {
                                                    <DeleteIcon />
                                                 </IconButton>
                                                 <IconButton color="primary" aria-label="add to shopping cart">
-                                                  <Button onClick={()=>onClickViewDetail(row)} sx={{fontSize: '12px', textDecoration: 'none'}} to="#">View</Button>
+                                                  <Button onClick={()=>onClickViewDetail(row)} sx={{fontSize: '11px', textDecoration: 'none'}} to="#">View</Button>
                                                 </IconButton>
                                             </Stack>
                         </StyledTableCell>

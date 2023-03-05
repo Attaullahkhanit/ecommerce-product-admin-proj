@@ -6,3 +6,7 @@
 export const getFileSrcFromPublicFolderDetailpg = (name) => {
     return `${process.env.PUBLIC_URL}/assets/images/DetailImg/${name}`;
   }; 
+
+export const getFileSrcFromPublicimg= (name) => {
+    return `${process.env.PUBLIC_URL}/assets/images/${name}`;
+}; 

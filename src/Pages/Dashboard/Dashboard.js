@@ -3,6 +3,7 @@ import './Dashboard.css';
 import Title from 'antd/lib/typography/Title';
 import { useNavigate, useNavigation } from "react-router-dom";
 import Link from '@mui/material/Link';
+import { getFileSrcFromPublicimg } from '../../utils';
 import {
       OrderedListOutlined,
       DesktopOutlined,
@@ -51,16 +52,15 @@ function Dashboard(props) {
         minHeight: '100vh',
       }}
       >
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-          <Title style={{color: 'white',
-          textAlign:'center',
-          padding: 5,
-          }} level={3}>Dashboard</Title>
-        <Menu theme="dark" defaultSelectedKeys={['2']} mode="inline" items={items} />
+      <Sider  collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <Content style={{display: 'flex', alignItems: 'baseline'}}>
+          <Content><img style={{width: '50px', height: '50px', paddingTop: '10px', marginLeft: 'auto'}} src={getFileSrcFromPublicimg("LogoDiamondsPasha.png")} alt="logoimg"/></Content>
+          <Content><h4 style={{fontSize: '20px', fontWeight: 'bold', color: '#B09E81'}}>Dashboard </h4></Content>
+        </Content>
+        <Menu theme= "dark" defaultSelectedKeys={['2']} mode="inline" items={items} />
       </Sider>
       <Layout className="site-layout">
         <Header
-          
           style={{
             display: 'flex',
             flex: 'row',
@@ -75,13 +75,9 @@ function Dashboard(props) {
           <div style={{float: 'right', marginRight: '20px'}}>
             <Avatar style={{background: 'gray'}} size={35} icon={<UserOutlined />} />
             <Link sx={{px: 2, py: 1, ml: 2, background: '#2BBBAD', borderRadius: '3px', color: 'white', textDecoration: 'none', }} name="Add User">Log Out</Link>
-          </div>
-                    
-        </Content>
-          
-        
-        </Header>
-        
+          </div>           
+        </Content>  
+        </Header> 
         <Content
           style={{
             margin: '0 0px',

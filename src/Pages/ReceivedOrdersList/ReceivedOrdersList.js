@@ -15,6 +15,7 @@ import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { receivedOrderListAction } from '../../Redux/Actions/ReceivedOrdersListAction';
+import { Box, Button } from '@mui/material';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -60,7 +61,9 @@ function ReceivedOrdersList() {
         <Dashboard>
         <div className='regUL-title'>
                 <div><h6>Received Order List</h6></div>
-                <div><Link onClick={onClickToReceivedAddForm} sx={{px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Add User</Link></div>
+                <Box sx={{p: 2}}>
+                    <Button onClick={onClickToReceivedAddForm} sx={{px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Add User</Button>
+                </Box>
             </div>
             <TableContainer className='tablecontainer' >
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -86,16 +89,16 @@ function ReceivedOrdersList() {
                         </StyledTableCell>
                         <StyledTableCell >{row?.username}</StyledTableCell>
                         <StyledTableCell >{row?.email}</StyledTableCell>
-                        <StyledTableCell >{row?.price}</StyledTableCell>
-                        <StyledTableCell >{row?.status}</StyledTableCell>
-                        <StyledTableCell >{row?.addresscode}</StyledTableCell>
-                        <StyledTableCell >{row?.pnumber}</StyledTableCell>
+                        <StyledTableCell >{row?.price}323$</StyledTableCell>
+                        <StyledTableCell >{row?.status}Received</StyledTableCell>
+                        <StyledTableCell >{row?.addresscode}2325</StyledTableCell>
+                        <StyledTableCell >{row?.pnumber}932423423</StyledTableCell>
                         <StyledTableCell ><Stack direction="row" spacing={1}>
                                                 <IconButton aria-label="delete">
                                                    <DeleteIcon />
                                                 </IconButton>
                                                 <IconButton color="primary" aria-label="add to shopping cart">
-                                                  <Link onClick={onClickToReceivedPage} sx={{fontSize: '12px', textDecoration: 'none'}} href="#">View</Link>
+                                                  <Button onClick={()=>onClickToReceivedPage(row)} sx={{fontSize: '11px', textDecoration: 'none'}} to="#">View</Button>
                                                 </IconButton>
                                             </Stack>
                         </StyledTableCell>
