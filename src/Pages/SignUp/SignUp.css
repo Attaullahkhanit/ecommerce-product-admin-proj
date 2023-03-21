@@ -1,24 +1,27 @@
-*{
+* {
     margin-left: 5px;
     margin-right: 5px;
 }
 
-.heading-1{
-    width: 100%; 
+.heading-1 {
+    width: 100%;
     text-align: center;
     padding: 10px 0 10px 0;
     color: black;
 }
-.form{
+
+.form {
     margin-top: 50px;
     margin-left: 0px;
     margin-right: 0px;
 
 }
-.card{
+
+.card {
     box-shadow: initial !important;
 }
-.card{
+
+.card {
 
     height: 700px;
     justify-content: center;
@@ -28,13 +31,13 @@
     padding-left: 0px;
     padding-right: 0px;
 }
-.form-item1{
-    
-}
+
+.form-item1 {}
+
 :where(.css-dev-only-do-not-override-1i536d8).ant-card-hoverable {
-    transition: box-shadow 0.2s,border-color 0.2s;
+    transition: box-shadow 0.2s, border-color 0.2s;
     display: flex;
     flex-direction: row;
     min-height: 400px;
-  
+
 }

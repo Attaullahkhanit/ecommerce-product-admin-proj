@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import Dashboard from '../Dashboard/Dashboard';
+import React, { useEffect, useState } from 'react';
+//import Dashboard from '../Dashboard/Dashboard';
 import './NonAlcholicPerfumes.css';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -16,8 +16,13 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { nonAlcholicPerfumesAction } from '../../Redux/Actions/NonAlcholicPerfumesAction';
 import { Box, Button } from '@mui/material';
-import { getFileSrcFromPublicimg } from '../../utils';
+import { Edit } from '@mui/icons-material';
+import PreviewIcon from '@mui/icons-material/Preview';
+import { Suspense } from 'react';
+import LinearProgress from '@mui/material/LinearProgress';
 
+
+const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'))
 
 
 const tableuserimage = userimage
@@ -40,81 +45,107 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yot', tableuserimage, 234, "expensive"),
-  createData('florence', tableuserimage, 234, 'very good enough'),
-  createData('Gorge', tableuserimage, 2956, 'you can easily buy'),
-  createData('Cupcake', 305, 3.7, 67),
-  createData('Gingerbread', 356, 16.0, 49),
-];
-
 function NonAlcholicPerfumes() {
 
   const navigate = useNavigate();
   function onClickToAddForm() {
     navigate('/nonalcholicperfumesform')
   }
-  function onClickToNonAlcholicDetail() {
-    navigate('/nonalcholicperfumesdetail')
+  function onClicknonalcholicperfumesupdate(objrow) {
+    navigate('/nonalcholicperfumesupdate',
+      { state: objrow })
   }
+  function onClickToNonAlcholicDetail(objrow) {
+    navigate('/nonalcholicperfumesdetail',
+      { state: objrow })
+  }
+  const [delValue, setDelValue] = useState(false)
   const dispatchdata = useDispatch();
   useEffect(() => {
     dispatchdata(nonAlcholicPerfumesAction());
-  }, [])
+    console.log("resultttttt")
+  }, [delValue])
+
   console.log(dispatchdata, 'nonAlcholicPerfumedata');
   const selectdata = useSelector(state => state);
   console.log(selectdata.nonAlcholicPerfumeReducer, 'nonalcholicDtReducers');
+
+  // Delete Api
+
+  const onClickDeletRecord = (listrecord) => {
+    console.log(listrecord, "deletedddd")
+    var requestOptions = {
+      method: 'DELETE',
+      redirect: 'follow'
+    };
+
+    fetch(`https://backend-apis.pasha.org.uk/delete-noneAlcohlicPerfume/${listrecord._id}`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        alert(result?.message)
+        console.log(result)
+        setDelValue(result?.message)
+      }
+      )
+      .catch(error => console.log('error', error));
+  }
+
   return (
     <>
-      <Dashboard>
-        <div className='regUL-title'>
-          <div><h6>Non Alcholic Perfumes</h6></div>
-          <Box sx={{ p: 2 }}>
-            <Button onClick={onClickToAddForm} sx={{ px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Add User</Button>
-          </Box>
-        </div>
-        <TableContainer className='tablecontainer' >
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Perfume Name</StyledTableCell>
-                <StyledTableCell >Image</StyledTableCell>
-                <StyledTableCell >Price</StyledTableCell>
-                <StyledTableCell >Description</StyledTableCell>
-                <StyledTableCell >Action</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {selectdata.nonAlcholicPerfumeReducer.dtload == true ?
-                <div>Loading...</div> :
-                selectdata?.nonAlcholicPerfumeReducer?.payload?.map((row) => (
-                  <StyledTableRow key={row?.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row?.name}
-                    </StyledTableCell>
-                    <StyledTableCell ><img className=' ' style={{ width: '50px', height: '50px' }} src={getFileSrcFromPublicimg("Ellipse 26.png")} alt="tableuserimage" /></StyledTableCell>
-                    <StyledTableCell >{row?.price}945$</StyledTableCell>
-                    <StyledTableCell >{row?.descriptin}Awesome Perfume</StyledTableCell>
-                    <StyledTableCell ><Stack direction="row" spacing={1}>
-                      <IconButton aria-label="delete">
-                        <DeleteIcon />
-                      </IconButton>
-                      <IconButton color="primary" aria-label="add to shopping cart">
-                        <Button onClick={() => onClickToNonAlcholicDetail(row)} sx={{ fontSize: '11px', textDecoration: 'none' }} to="#">View</Button>
-                      </IconButton>
-                    </Stack>
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Dashboard>
+      <Suspense fallback={<div><Box sx={{ width: '100%' }}><LinearProgress /></Box></div>}>
+        <Dashboard>
+          <div className='regUL-title'>
+            <div><h6>Non Alcholic Perfumes</h6></div>
+            <Box sx={{ p: 2 }}>
+              <Button onClick={onClickToAddForm} sx={{ px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="A">Add Product</Button>
+            </Box>
+          </div>
+          <TableContainer className='tablecontainer' >
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell >Perfume Name</StyledTableCell>
+                  <StyledTableCell >Image</StyledTableCell>
+                  <StyledTableCell >Price</StyledTableCell>
+                  <StyledTableCell >Discount Price</StyledTableCell>
+                  <StyledTableCell >Quantity</StyledTableCell>
+                  <StyledTableCell >Description</StyledTableCell>
+                  <StyledTableCell >Action</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {selectdata.nonAlcholicPerfumeReducer.dtload == true ?
+                  <div><Box sx={{ width: '100%', textAlign: 'center' }}><LinearProgress /></Box></div> :
+                  selectdata?.nonAlcholicPerfumeReducer?.payload?.map((row, key) => (
+                    <StyledTableRow key={key}>
+                      <StyledTableCell component="th" scope="row">
+                        {row?.name}
+                      </StyledTableCell>
+                      <StyledTableCell ><img className=' ' style={{ width: '50px', height: '50px' }} src={row?.imagePath} alt="tableuserimage" /></StyledTableCell>
+                      <StyledTableCell >${row?.price} </StyledTableCell>
+                      <StyledTableCell >${row?.discountPrice} </StyledTableCell>
+                      <StyledTableCell >{row?.quantity} </StyledTableCell>
+                      <StyledTableCell >{row?.description} </StyledTableCell>
+                      <StyledTableCell >
+                        <Stack direction="row" spacing={1}>
+                          <Button onClick={() => onClickDeletRecord(row)} variant="outlined" >
+                            <DeleteIcon />
+                          </Button>
+                          <Button onClick={() => onClicknonalcholicperfumesupdate(row)} variant="outlined">
+                            <Edit />
+                          </Button>
+                          <Button onClick={() => onClickToNonAlcholicDetail(row)} variant="outlined">
+                            <PreviewIcon />
+                          </Button>
+                        </Stack>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Dashboard>
+      </Suspense>
     </>
   )
 }

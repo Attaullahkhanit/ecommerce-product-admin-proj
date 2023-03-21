@@ -4,9 +4,9 @@
 
 export const alcholicPerfumesAction = (obj) => {
     return function (dispatch) {
-        fetch('https://jsonplaceholder.typicode.com/users',)
+        fetch('https://backend-apis.pasha.org.uk/all-alcohlic-perfume',)
             .then((result) => result.json())
-            .then((res) => {
+            .then((res) => { 
                 return dispatch({
                     type: "ALCHOLIC_PERFUMES_ACT",
                     payload: res

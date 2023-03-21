@@ -1,8 +1,9 @@
-import React , {useState} from 'react';
+import React , {Suspense, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import  { Button, Checkbox, Form, Input, Card } from 'antd';
 import './SignUp.css';
-import Dashboard from '../Dashboard/Dashboard';
+
+const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
 function SignUp() {
    const [name, setname]= useState()
@@ -29,6 +30,7 @@ function SignUp() {
      
   return (
     <>
+    <Suspense fallback={<div>Loading...</div>}>
     <Dashboard>
       <h1 className='heading-1'>Sign Up</h1>
      <Card
@@ -150,6 +152,7 @@ function SignUp() {
     </Form>
     </Card>
     </Dashboard>
+    </Suspense>
     </>
   )
 }

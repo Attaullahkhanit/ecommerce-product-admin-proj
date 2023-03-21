@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
 import { useNavigate, useNavigation } from "react-router-dom";
 import Link from '@mui/material/Link';
@@ -38,7 +38,17 @@ function Dashboard(props) {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const navigatehome = useNavigate()
+  useEffect(() => {
 
+    const getdataLocalhost = JSON.parse(localStorage.getItem("login"))
+
+    if (getdataLocalhost?.isLogedIn !== "yes") {
+      // save user sign In status for page authorization 
+      navigatehome("/login")
+    }
+
+  }, [])
   return (
     <>
       <Layout

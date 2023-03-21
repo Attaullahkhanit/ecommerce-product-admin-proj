@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Dashboard from '../Dashboard/Dashboard';
 import './RegUsersList.css';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -8,18 +7,19 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector, useDispatch } from 'react-redux';
 import { regUsersListAction } from '../../Redux/Actions/RegUsersListAction';
-import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
+import { Suspense } from 'react';
+import PreviewIcon from '@mui/icons-material/Preview';
+import { Edit } from '@mui/icons-material';
+import LinearProgress from '@mui/material/LinearProgress';
 
-// import Paper from '@mui/material/Paper';
 
-
+const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,35 +41,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const reguserlistdata = [{
-  fname: 'atkhan',
-  lname: 'khan',
-  email: 'atkhan@gmail.com',
-  phoneno: '322-34234-7658'
-},
-{
-  fname: 'atkhansf',
-  lname: 'khansj',
-  email: 'atkhanfsas@gmail.com',
-  phoneno: '322-34232-9876'
-},
-{
-  fname: 'aewtkhan',
-  lname: 'sskhan',
-  email: 'rqwatkhan@gmail.com',
-  phoneno: '83892343'
-},]
 
 
 function RegUsersList() {
-
-
-  const dispatchdata = useDispatch();
-  useEffect(() => {
-    dispatchdata(regUsersListAction);
-  }, [])
-  const selectdata = useSelector((abc) => { return abc })
-  console.log(selectdata, 'reguserlistdata')
 
   const navigate = useNavigate();
   function onClickAddForm() {
@@ -93,59 +67,88 @@ function RegUsersList() {
   useEffect(() => {
     dispatchData(regUsersListAction())
   }, [])
+
   const selectData = useSelector(state => state)
-  console.log(selectData.regUsersListReducer, 'redux Data')
+  console.log(selectData.regUsersListReducer, 'redux Dataaaaaa')
+
+  const regUserApiData = selectData.regUsersListReducer;
+
+  const onClickDeletRecord = (listrecord) => {
+    console.log(listrecord, "deletedddd")
+    var requestOptions = {
+      method: 'DELETE',
+      redirect: 'follow'
+    };
+
+    fetch(`https://backend-apis.pasha.org.uk/delete-user/${listrecord._id}`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        alert(result?.message)
+        console.log(result)
+      }
+      )
+      .catch(error => console.log('error', error));
+
+  }
+  const onClickalcholicperfumesupdate = () => {
+    navigate('/reguserslistupdate')
+  }
 
   return (
     <>
-      <Dashboard>
-        <div className='regUL-title'>
-          <div><h6>Register Users List</h6></div>
-          <Box sx={{ p: 2 }}>
-            <Button onClick={onClickAddForm} sx={{ px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Add User</Button>
-          </Box>
-        </div>
-        {/* , */}
-        <TableContainer className='tablecontainer'>
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell value={firstName} onChange={(e) => setFirstName(e.target.value)}>Perfume Name</StyledTableCell>
-                <StyledTableCell value={lastName} onChange={(e) => setLastName(e.target.value)}>SKU No</StyledTableCell>
-                <StyledTableCell value={email} onChange={(e) => setEmail(e.target.value)}>Specification</StyledTableCell>
-                <StyledTableCell value={phone} onChange={(e) => setPhone(e.target.value)}>Price</StyledTableCell>
-                <StyledTableCell value={phone} onChange={(e) => setPhone(e.target.value)}>Description</StyledTableCell>
-                <StyledTableCell >Action</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {selectData.regUsersListReducer.dtload == true ?
-                <div>loading...</div> :
-                selectData?.regUsersListReducer?.payload?.map((row) => (
+      <Suspense fallback={<div><Box sx={{ width: '100%' }}><LinearProgress /></Box></div>}>
+        <Dashboard>
+          <div className='regUL-title'>
+            <div><h6>Register Users List</h6></div>
+            <Box sx={{ p: 2 }}>
+              <Button onClick={onClickAddForm} sx={{ px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Add User</Button>
+            </Box>
+          </div>
+          {/* , */}
+          <TableContainer className='tablecontainer'>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell value={firstName} onChange={(e) => setFirstName(e.target.value)}>Name</StyledTableCell>
+                  <StyledTableCell value={lastName} onChange={(e) => setLastName(e.target.value)}>Email</StyledTableCell>
+                  <StyledTableCell value={email} onChange={(e) => setEmail(e.target.value)}>Phone No</StyledTableCell>
+                  <StyledTableCell value={phone} onChange={(e) => setPhone(e.target.value)}>Password</StyledTableCell>
+                  <StyledTableCell value={phone} onChange={(e) => setPhone(e.target.value)}>__V</StyledTableCell>
+                  <StyledTableCell >Action</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {regUserApiData?.dtload == true ?
+                  <div><Box sx={{ width: '100%' }}><LinearProgress /></Box></div> :
+                  regUserApiData?.payload?.map((row) => (
+                    <StyledTableRow key={row?.name}>
+                      <StyledTableCell component="th" scope="row">
+                        {row?.name} Fredrik
+                      </StyledTableCell>
+                      <StyledTableCell >{row?.email}</StyledTableCell>
+                      <StyledTableCell >{row?.mobileNumber}</StyledTableCell>
+                      <StyledTableCell >{row?.password}</StyledTableCell>
+                      <StyledTableCell >{row?.__v}</StyledTableCell>
+                      <StyledTableCell > <Stack direction="row" spacing={1}>
+                        <Button variant='outlined' onClick={() => onClickDeletRecord(row)} variant="outlined">
+                          <DeleteIcon />
+                        </Button>
+                        <Button onClick={onClickalcholicperfumesupdate} aria-label="update" variant="outlined">
+                          <Edit />
+                        </Button>
+                        <Button onClick={() => onClickViewDetail(row)} variant="outlined">
+                          <PreviewIcon />
+                        </Button>
 
-                  <StyledTableRow key={row?.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row?.name}
-                    </StyledTableCell>
-                    <StyledTableCell >{row?.username}</StyledTableCell>
-                    <StyledTableCell >{row?.email}</StyledTableCell>
-                    <StyledTableCell >{row?.address.street}</StyledTableCell>
-                    <StyledTableCell >{row?.company.catchPhrase}</StyledTableCell>
-                    <StyledTableCell > <Stack direction="row" spacing={1}>
-                      <IconButton aria-label="delete">
-                        <DeleteIcon />
-                      </IconButton>
-                      <IconButton color="primary" aria-label="add to shopping cart">
-                        <Button onClick={() => onClickViewDetail(row)} sx={{ fontSize: '11px', textDecoration: 'none' }} to="#">View</Button>
-                      </IconButton>
-                    </Stack>
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Dashboard>
+                      </Stack>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Dashboard>
+      </Suspense>
     </>
   )
 }

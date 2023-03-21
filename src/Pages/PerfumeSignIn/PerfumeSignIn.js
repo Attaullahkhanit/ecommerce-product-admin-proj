@@ -14,17 +14,50 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from './Copyright';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 function PerfumeSignIn() {
+    const navigate = useNavigate();
+
+    const [apiData, setData]=React.useState()
     const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+    email: data.get('email'),
+    password: data.get('password'),
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://backend-apis.pasha.org.uk/adminLogin", requestOptions)
+  .then(response => response.json())
+  .then(result =>{
+
+  setData(result); 
+ 
+ if(result.statu ==true){
+    localStorage.setItem("login", JSON.stringify({...result, isLogedIn:"yes"}))
+    navigate('/reguserslistform')
+ 
+} else {
+    alert("Incorrect password or emilail")
+}     
+})
+  .catch(error => console.log('error', error));
     };
+    console.log(apiData, 'apiData')
+
     return (
         <>
             <ThemeProvider theme={theme}>

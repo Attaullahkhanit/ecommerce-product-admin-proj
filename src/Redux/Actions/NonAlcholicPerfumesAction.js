@@ -1,7 +1,7 @@
 
 export const nonAlcholicPerfumesAction = (objdata) => {
     return function (dispatch) {
-        fetch('https://jsonplaceholder.typicode.com/users',)
+        fetch('https://backend-apis.pasha.org.uk/all-none-alcohlic-perfume',)
             .then((response) => response.json())
             .then((res) => {
                 dispatch({

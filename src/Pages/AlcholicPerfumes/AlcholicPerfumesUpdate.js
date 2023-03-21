@@ -1,35 +1,34 @@
 import React from 'react';
 import './AlcholicPerfumes.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Link, } from '@mui/material';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { useState } from 'react';
 import { Suspense } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
-function AlcholicPerfumeForm() {
+function AlcholicPerfumesUpdate() {
+  const locationData = useLocation();
 
-  const [firstName, setFirstName] = useState();
+  console.log(locationData.state, 'alcholicData for Updatpage')
+
+  const [firstName, setFirstName] = useState(locationData?.state?.name);
   const [imgsrc, setImgSrc] = useState("");
-  const [price, setPrice] = useState();
-  const [quantity, setQuantity] = useState();
-  const [description, setDescription] = useState();
-  const [discountPrice, setDiscountPrice] = useState();
+  const [price, setPrice] = useState(locationData?.state?.price);
+  const [discountPrice, setDiscountPrice] = useState(locationData?.state?.discountPrice);
+  const [quantity, setQuantity] = useState(locationData?.state?.quantity);
+  const [description, setDescription] = useState(locationData?.state?.description);
 
-  const [isLoading, setIsLoading] = useState(false);
 
-  const navigate = useNavigate();
 
-  // image uploading POST API function 
-  // useEffect(() => {
-  //   setImgUploaded(imgUpload)
-  // },[])
+  const [isLoading, setIsLoading] = useState(false)
+
+  //   Update Button Put Api
   const imgUpload = (e) => {
     setIsLoading(true)
     const file = e.target.files[0]
@@ -43,52 +42,55 @@ function AlcholicPerfumeForm() {
       .then((res) => {
         setIsLoading(false)
         setImgSrc(res.imgePath)
-
       })
   }
-
-
-  // submit form with POST api 
-  function onClickSubmitBackToAddForm() {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
+  const onClickUpdateBackToAddForm = () => {
+    console.log({
       name: firstName,
-      price: price,
-      quantity: quantity,
-      description: description,
       imagePath: imgsrc,
-      discountPrice: discountPrice
-    });
-
+      price: price,
+      description: description,
+      discountPrice: discountPrice,
+    }, 'iiiiiiiiiiiiiiiiiiiiii')
     var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: firstName,
+        imagePath: imgsrc,
+        price: price,
+        discountPrice: discountPrice,
+        quantity: quantity,
+        description: description,
+
+      }),
     };
-    fetch("https://backend-apis.pasha.org.uk/alcohlic-perfume", requestOptions)
+
+    fetch(`https://backend-apis.pasha.org.uk/update-alcohlic-perfume/${locationData?.state?._id}`, requestOptions)
       .then(response => response.json())
       .then(result => {
-        console.log(result, 'alcholic form data submit result')
+        console.log(result, 'updated result')
         navigate('/alcholicperfumes')
-        alert(result.message, 'data successfully submited')
       }
-        // console.log(result, 'Alcholic Data');
-
       )
       .catch(error => console.log('error', error));
-  }
 
-  // go back 
+  }
+  const navigate = useNavigate();
   const onClickBack = () => {
     navigate('/alcholicperfumes')
   }
 
+  //const alcholicPerfumesRecord = locationData.state ;
+  // image uploading function 
+
+
+
+
+
   return (
     <>
-      <Suspense fallback={<div><Box sx={{ width: '100%' }}><LinearProgress /></Box></div>}>
+      <Suspense fallback={<div><Box sx={{ width: '60%', textAlign: 'center', ml: 'auto', mr: 'auto' }}><LinearProgress /></Box></div>}>
         <Dashboard>
           <Card sx={{ maxWidth: '70%', marginTop: '10px', marginLeft: 'auto', marginRight: 'auto' }}>
             <Box sx={{ p: 2 }}>
@@ -113,6 +115,7 @@ function AlcholicPerfumeForm() {
                     onChange={(e) => setFirstName(e.target.value)}
                     autoComplete="current-password"
                   />
+
                   <TextField
                     id="outlined-basic"
                     variant='outlined'
@@ -136,7 +139,7 @@ function AlcholicPerfumeForm() {
                     onChange={(e) => setDiscountPrice(e.target.value)}
                   />
                   <TextField
-                    id="outlined-number"
+                    id="outlined-password-input"
                     label="Quantity"
                     type="number"
                     value={quantity}
@@ -150,8 +153,8 @@ function AlcholicPerfumeForm() {
                     onChange={(e) => setDescription(e.target.value)}
                   />
                   <br />
-                  <Button onClick={onClickSubmitBackToAddForm} sx={{ width: "30ch", my: 3 }} variant="contained" endIcon={<SendIcon />}>
-                    Submit
+                  <Button onClick={onClickUpdateBackToAddForm} sx={{ width: "30ch", my: 3 }} variant="contained" endIcon={<SendIcon />}>
+                    Update
                   </Button>
                 </div>
               </Box>
@@ -163,4 +166,4 @@ function AlcholicPerfumeForm() {
   )
 }
 
-export default AlcholicPerfumeForm
+export default AlcholicPerfumesUpdate

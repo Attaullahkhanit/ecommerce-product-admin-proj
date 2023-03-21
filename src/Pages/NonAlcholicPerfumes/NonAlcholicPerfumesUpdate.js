@@ -1,8 +1,8 @@
 import React from 'react'
 import './NonAlcholicPerfumes.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Link, } from '@mui/material';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
@@ -12,17 +12,22 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
-function NonAlcholicPerfumesForm() {
-    const [firstName, setFirstName] = useState();
-    const [imgsrc, setImgSrc] = useState();
-    const [price, setPrice] = useState();
-    const [discountPrice, setDiscountPrice] = useState();
-    const [quantity, setQuantity] = useState();
-    const [description, setDescription] = useState();
+function NonAlcholicPerfumesUpdate() {
 
-    const [isLoading, setIsLoading] = useState(false);
+    const locationData = useLocation();
 
-    // Image Uploading POST API
+    console.log(locationData.state, 'alcholicData for Updatpage')
+
+    const [firstName, setFirstName] = useState(locationData?.state?.name);
+    const [imgsrc, setImgSrc] = useState("");
+    const [price, setPrice] = useState(locationData?.state?.price);
+    const [description, setDescription] = useState(locationData?.state?.description);
+    const [discountPrice, setDiscountPrice] = useState(locationData?.state?.discountPrice);
+    const [quantity, setQuantity] = useState(locationData?.state?.quantity);
+
+    const [isLoading, setIsLoading] = useState(false)
+
+    //   Update Button Put Api
     const imgUpload = (e) => {
         setIsLoading(true)
         const file = e.target.files[0]
@@ -38,60 +43,44 @@ function NonAlcholicPerfumesForm() {
                 setImgSrc(res.imgePath)
             })
     }
-
-
-
-    const nonalcholicformObjData = {
-        fname: firstName,
-        imgsrc: imgsrc,
-        price: price,
-        discountprice: discountPrice,
-        quantity: quantity,
-        description: description
-    }
-    console.log(nonalcholicformObjData, 'nonalcholicformdata')
-    const navigate = useNavigate();
-
-    // Post Api
-    function onClickSubmitBackToAddForm() {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-            name: firstName,
-            price: price,
-            discountprice: discountPrice,
-            quantity: quantity,
-            description: description,
-            imagePath: imgsrc
-        });
-
+    const onClickUpdateBackToAddForm = () => {
         var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: firstName,
+                imagePath: imgsrc,
+                price: price,
+                description: description,
+                discountPrice: discountPrice,
+                quantity: quantity,
+            }),
         };
 
-        fetch("https://backend-apis.pasha.org.uk/none-alcohlic-perfume", requestOptions)
+        fetch(`https://backend-apis.pasha.org.uk/update-none-alcohlic-perfume/${locationData?.state?._id}`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result, 'Non alcholic Data...');
+                console.log(result, 'updated result')
+                alert(result.message)
                 navigate('/nonalcholicperfumes')
-            })
+            }
+            )
             .catch(error => console.log('error', error));
+
     }
 
-    function onClickBackToAddForm() {
+    const navigate = useNavigate();
+    const onClickBack = () => {
         navigate('/nonalcholicperfumes')
     }
+
     return (
         <>
-            <Suspense fallback={<div><Box sx={{ width: '100%' }}><LinearProgress /></Box></div>}>
+            <Suspense fallback={<div><Box sx={{ width: '60%', textAlign: 'center', ml: 'auto', mr: 'auto' }}><LinearProgress /></Box></div>}>
                 <Dashboard>
                     <Card sx={{ maxWidth: '70%', marginTop: '10px', marginLeft: 'auto', marginRight: 'auto' }}>
                         <Box sx={{ p: 2 }}>
-                            <Button onClick={onClickBackToAddForm} sx={{ px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Back</Button>
+                            <Button onClick={onClickBack} sx={{ px: 2, py: 1, background: '#2BBBAD', color: 'white', textDecoration: 'none', }} name="Add User">Back</Button>
                         </Box>
                         <CardContent sx={{ textAlign: 'center' }}>
                             <Box
@@ -104,12 +93,13 @@ function NonAlcholicPerfumesForm() {
                             >
                                 <div>
                                     <TextField
-                                        id="outlined-password-input"
-                                        label="First Name"
+                                        id="outlined-basic"
+                                        variant='outlined'
+                                        label="Product Name"
                                         type="name"
-                                        autoComplete="current-password"
                                         value={firstName}
                                         onChange={(e) => setFirstName(e.target.value)}
+                                        autoComplete="current-password"
                                     />
                                     <TextField
                                         id="outlined-basic"
@@ -127,14 +117,14 @@ function NonAlcholicPerfumesForm() {
                                         onChange={(e) => setPrice(e.target.value)}
                                     />
                                     <TextField
-                                        id="outlined-number"
+                                        id="outlined-password-input"
                                         label="Discount Price"
                                         type="number"
                                         value={discountPrice}
                                         onChange={(e) => setDiscountPrice(e.target.value)}
                                     />
                                     <TextField
-                                        id="outlined-number"
+                                        id="outlined-password-input"
                                         label="Quantity"
                                         type="number"
                                         value={quantity}
@@ -148,8 +138,8 @@ function NonAlcholicPerfumesForm() {
                                         onChange={(e) => setDescription(e.target.value)}
                                     />
                                     <br />
-                                    <Button onClick={onClickSubmitBackToAddForm} sx={{ width: "30ch", my: 3 }} variant="contained" endIcon={<SendIcon />}>
-                                        Submit
+                                    <Button onClick={onClickUpdateBackToAddForm} sx={{ width: "30ch", my: 3 }} variant="contained" endIcon={<SendIcon />}>
+                                        Update
                                     </Button>
                                 </div>
                             </Box>
@@ -161,4 +151,4 @@ function NonAlcholicPerfumesForm() {
     )
 }
 
-export default NonAlcholicPerfumesForm
+export default NonAlcholicPerfumesUpdate
