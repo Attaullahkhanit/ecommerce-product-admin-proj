@@ -12,6 +12,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
+const BaseUrl = process.env.REACT_APP_BASE_URL
+
 function NonAlcholicPerfumesForm() {
     const [firstName, setFirstName] = useState();
     const [imgsrc, setImgSrc] = useState();
@@ -73,7 +75,7 @@ function NonAlcholicPerfumesForm() {
             redirect: 'follow'
         };
 
-        fetch("https://backend-apis.pasha.org.uk/none-alcohlic-perfume", requestOptions)
+        fetch("${BaseUrl}/none-alcohlic-perfume", requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result, 'Non alcholic Data...');
