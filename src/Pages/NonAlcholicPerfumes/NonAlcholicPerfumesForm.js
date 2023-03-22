@@ -30,7 +30,7 @@ function NonAlcholicPerfumesForm() {
         const file = e.target.files[0]
         const formdata = new FormData()
         formdata.append('images', file)
-        fetch('https://backend-apis.pasha.org.uk/images-upload', {
+        fetch('${BaseUrl}/images-upload', {
             method: "post",
             body: formdata
         })
