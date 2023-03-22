@@ -10,6 +10,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
+const BaseUrl = process.env.REACT_APP_BASE_URL
+
 function ReceivedOrderListDetail() {
   const navigate = useNavigate();
   function onClickBackToRegPage() {
