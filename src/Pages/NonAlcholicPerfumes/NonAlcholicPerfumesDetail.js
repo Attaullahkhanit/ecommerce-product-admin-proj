@@ -9,6 +9,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
 
+
+
 function NonAlcholicPerfumesDetail() {
   const navigate = useNavigate();
   function onClickBackToRegPage() {
