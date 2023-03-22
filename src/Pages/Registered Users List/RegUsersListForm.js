@@ -12,6 +12,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
+const BaseUrl = process.env.REACT_APP_BASE_URL
+
 function RegUsersListForm() {
 
     const [name, setName] = useState();
@@ -48,7 +50,7 @@ function RegUsersListForm() {
             redirect: 'follow'
         };
 
-        fetch("https://backend-apis.pasha.org.uk/allusers", requestOptions)
+        fetch("${BaseUrl}/allusers", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result, 'Reg User List Data')
