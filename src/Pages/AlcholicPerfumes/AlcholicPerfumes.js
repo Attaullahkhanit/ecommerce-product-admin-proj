@@ -23,6 +23,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
+const BaseUrl = process.env.REACT_APP_BASE_URL
 
 
 const tableuserimage = userimage
@@ -78,7 +79,7 @@ function AlcholicPerfumes() {
       redirect: 'follow'
     };
 
-    fetch(`https://backend-apis.pasha.org.uk/delete-alcohlicPerfume/${listrecord._id}`, requestOptions)
+    fetch(`${BaseUrl}/delete-alcohlicPerfume/${listrecord._id}`, requestOptions)
       .then(response => response.json())
       .then(result => {
         //result?.filter((item) => item !== listrecord._id);
