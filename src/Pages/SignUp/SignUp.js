@@ -5,6 +5,8 @@ import './SignUp.css';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
+//const BaseUrl = process.env.REACT_APP_BASE_URL
+
 function SignUp() {
    const [name, setname]= useState()
    const [email, setEmail]= useState()
