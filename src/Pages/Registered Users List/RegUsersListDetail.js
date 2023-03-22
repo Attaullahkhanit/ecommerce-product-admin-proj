@@ -8,6 +8,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
+//const BaseUrl = process.env.REACT_APP_BASE_URL
+
 function RegUsersListDetail() {
   const navigate = useNavigate();
   const uselocatdata = useLocation()
