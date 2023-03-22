@@ -1,11 +1,11 @@
 import { redirect } from "react-router-dom";
 
-
+const BaseUrl = process.env.REACT_APP_BASE_URL
 
 export const regUsersListAction = (dataitem) => {
     console.log("checkdata")
     return function (dispatch) {
-        fetch('https://backend-apis.pasha.org.uk/allusers',)
+        fetch(`${BaseUrl}/allusers`,)
             .then((response) => response.json())
             .then((res) => {
                 console.log("MyReg")
