@@ -12,6 +12,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
+const BaseUrl = process.env.REACT_APP_BASE_URL
+
 function AlcholicPerfumesUpdate() {
   const locationData = useLocation();
 
@@ -34,7 +36,7 @@ function AlcholicPerfumesUpdate() {
     const file = e.target.files[0]
     const formdata = new FormData()
     formdata.append('images', file)
-    fetch('https://backend-apis.pasha.org.uk/images-upload', {
+    fetch('${BaseUrl}/images-upload', {
       method: "post",
       body: formdata
     })
@@ -66,7 +68,7 @@ function AlcholicPerfumesUpdate() {
       }),
     };
 
-    fetch(`https://backend-apis.pasha.org.uk/update-alcohlic-perfume/${locationData?.state?._id}`, requestOptions)
+    fetch(`${BaseUrl}/update-alcohlic-perfume/${locationData?.state?._id}`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result, 'updated result')
