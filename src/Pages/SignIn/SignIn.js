@@ -3,6 +3,8 @@ import './SignIn.css';
 import { Button, Checkbox, Form, Input, Card } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
+//const BaseUrl = process.env.REACT_APP_BASE_URL
+
 function SignIn() {
   const [userName, setUserName] = useState('name')
   const [userPassword, setUserPassword] = useState('1234')
