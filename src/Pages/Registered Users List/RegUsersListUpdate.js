@@ -6,6 +6,8 @@ import { Box } from '@mui/material';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'))
 
+// const BaseUrl = process.env.REACT_APP_BASE_URL
+
 function RegUsersListUpdate() {
     return (
         <>
