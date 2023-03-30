@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react';
-// import Dashboard from '../Dashboard/Dashboard';
 import './AlcholicPerfumes.css';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -10,7 +9,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
-import userimage from '../../Images/cutout.jpg';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -23,9 +21,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
 
+//const baseUrl = process.env.REACT_APP_BASE_URL
 
-
-const tableuserimage = userimage
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#001529',
@@ -46,10 +43,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-
-
 function AlcholicPerfumes() {
-
   const navigate = useNavigate();
   function onClickAddForm() {
     navigate('/alcholicperfumeform')
@@ -70,7 +64,6 @@ function AlcholicPerfumes() {
   const selectdata = useSelector(state => state);
   console.log(selectdata.alcholicPerfumesReducer, 'alcholicreduxdata')
   // Delete Record
-
   const onClickDeletRecord = (listrecord) => {
     console.log(listrecord, "deletedddd")
     var requestOptions = {
@@ -82,19 +75,15 @@ function AlcholicPerfumes() {
       .then(response => response.json())
       .then(result => {
         //result?.filter((item) => item !== listrecord._id);
-        //alert(result?.message)
+        alert(result?.message)
         console.log(result, 'myyyyyyyy')
-
       }
       )
       .catch(error => console.log('error', error));
-
   }
-
-
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div><Box sx={{ width: '100%' }}><LinearProgress /></Box></div>}>
         <Dashboard>
           <div className='regUL-title'>
             <div><h6>Alcholic Perfumes</h6></div>
