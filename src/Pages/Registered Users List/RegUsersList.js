@@ -20,6 +20,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
+const baseUrl = process.env.REACT_APP_BASEURL;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -80,7 +81,7 @@ function RegUsersList() {
       redirect: 'follow'
     };
 
-    fetch(`https://backend-apis.pasha.org.uk/delete-user/${listrecord._id}`, requestOptions)
+    fetch(`${baseUrl}/delete-user/${listrecord._id}`, requestOptions)
       .then(response => response.json())
       .then(result => {
         alert(result?.message)
