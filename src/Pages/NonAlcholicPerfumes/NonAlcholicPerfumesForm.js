@@ -11,6 +11,7 @@ import { Suspense } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
+const baseUrl = process.env.REACT_APP_BASEURL;
 
 function NonAlcholicPerfumesForm() {
     const [firstName, setFirstName] = useState();
@@ -28,7 +29,7 @@ function NonAlcholicPerfumesForm() {
         const file = e.target.files[0]
         const formdata = new FormData()
         formdata.append('images', file)
-        fetch('https://backend-apis.pasha.org.uk/images-upload', {
+        fetch('${baseUrl}/images-upload', {
             method: "post",
             body: formdata
         })
@@ -73,7 +74,7 @@ function NonAlcholicPerfumesForm() {
             redirect: 'follow'
         };
 
-        fetch("https://backend-apis.pasha.org.uk/none-alcohlic-perfume", requestOptions)
+        fetch("${baseUrl}/none-alcohlic-perfume", requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result, 'Non alcholic Data...');
