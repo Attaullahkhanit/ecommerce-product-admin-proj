@@ -20,6 +20,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
+const baseUrl = process.env.REACT_APP_BASEURL;
 
 //const baseUrl = process.env.REACT_APP_BASE_URL
 
@@ -71,7 +72,7 @@ function AlcholicPerfumes() {
       redirect: 'follow'
     };
 
-    fetch(`https://backend-apis.pasha.org.uk/delete-alcohlicPerfume/${listrecord._id}`, requestOptions)
+    fetch(`${baseUrl}/delete-alcohlicPerfume/${listrecord._id}`, requestOptions)
       .then(response => response.json())
       .then(result => {
         //result?.filter((item) => item !== listrecord._id);
