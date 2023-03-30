@@ -11,6 +11,7 @@ import { Suspense } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
+const baseUrl = process.env.REACT_APP_BASEURL;
 
 function AlcholicPerfumesUpdate() {
   const locationData = useLocation();
@@ -66,7 +67,7 @@ function AlcholicPerfumesUpdate() {
       }),
     };
 
-    fetch(`https://backend-apis.pasha.org.uk/update-alcohlic-perfume/${locationData?.state?._id}`, requestOptions)
+    fetch(`${baseUrl}/update-alcohlic-perfume/${locationData?.state?._id}`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result, 'updated result')
