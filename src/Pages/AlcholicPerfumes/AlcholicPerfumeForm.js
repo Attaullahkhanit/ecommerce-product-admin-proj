@@ -12,6 +12,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
+const baseUrl = process.env.REACT_APP_BASEURL;
 
 function AlcholicPerfumeForm() {
 
@@ -35,7 +36,7 @@ function AlcholicPerfumeForm() {
     const file = e.target.files[0]
     const formdata = new FormData()
     formdata.append('images', file)
-    fetch('https://backend-apis.pasha.org.uk/images-upload', {
+    fetch('${baseUrl}/images-upload', {
       method: "post",
       body: formdata
     })
@@ -68,7 +69,7 @@ function AlcholicPerfumeForm() {
       body: raw,
       redirect: 'follow'
     };
-    fetch("https://backend-apis.pasha.org.uk/alcohlic-perfume", requestOptions)
+    fetch("${baseUrl}/alcohlic-perfume", requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result, 'alcholic form data submit result')
