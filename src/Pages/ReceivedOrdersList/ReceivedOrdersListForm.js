@@ -12,6 +12,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
+const baseUrl = process.env.REACT_APP_BASEURL;
 
 function ReceivedOrdersListForm() {
 
@@ -55,7 +56,7 @@ function ReceivedOrdersListForm() {
             redirect: 'follow'
         };
 
-        fetch("https://jsonplaceholder.typicode.com/todos/1", requestOptions)
+        fetch("${baseUrl}/received_order_list", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result, 'Reg User List Data');
