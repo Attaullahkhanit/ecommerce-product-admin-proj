@@ -7,6 +7,7 @@ import { Suspense } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 
 const Dashboard = React.lazy(() => import('../Dashboard/Dashboard'));
+//const baseUrl = process.env.REACT_APP_BASEURL;
 
 function AlcholicPerfumesDetail() {
   const navigate = useNavigate();
